@@ -29,7 +29,7 @@ class winntp (
     notify => Service['w32time'],
   }
 
-  registry_key { 'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DateTime\\Servers':
+  registry_key { '32:HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DateTime\\Servers':
     ensure       => present,
     purge_values => $purge_unmanaged_servers,
   }
@@ -37,7 +37,7 @@ class winntp (
   # create a new numbered registry value for each ntp server (1 to $servers.length) 
   $servers.each |$index, $srv| {
     $i = $index + 1
-    registry_value { "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DateTime\\Servers\\${i}":
+    registry_value { "32:HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DateTime\\Servers\\${i}":
       ensure => present,
       type   => 'string',
       data   => $srv,
@@ -46,21 +46,21 @@ class winntp (
   }
 
   # default setting is first ntp server (server 1)
-  registry_value { 'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DateTime\\Servers':
+  registry_value { '32:HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DateTime\\Servers':
     ensure => present,
     type   => 'string',
     data   => '1',
     notify => Service['w32time'],
   }
 
-  registry_value { 'HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Config\\MaxPosPhaseCorrection':
+  registry_value { '32:HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Config\\MaxPosPhaseCorrection':
     ensure => present,
     type   => 'dword',
     data   => $max_pos_phase_correction,
     notify => Service['w32time'],
   }
 
-  registry_value { 'HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Config\\MaxNegPhaseCorrection':
+  registry_value { '32:HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Config\\MaxNegPhaseCorrection':
     ensure => present,
     type   => 'dword',
     data   => $max_neg_phase_correction,
