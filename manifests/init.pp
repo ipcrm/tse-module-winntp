@@ -29,7 +29,7 @@ class winntp (
     notify => Service['w32time'],
   }
 
-  registry_key { 'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DateTime\\Servers':
+  registry_key { '32:HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DateTime\\Servers':
     ensure       => present,
     purge_values => $purge_unmanaged_servers,
   }
