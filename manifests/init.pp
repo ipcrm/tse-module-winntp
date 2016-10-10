@@ -16,7 +16,7 @@ class winntp (
   }
 
   # the list of servers in required space-delimited string format
-  registry_value { 'HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Parameters\\NtpServer':
+  registry_value { '32:HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Parameters\\NtpServer':
     type   => 'string',
     data   => $ntp_servers,
     notify => Service['w32time'],
@@ -29,7 +29,7 @@ class winntp (
     notify => Service['w32time'],
   }
 
-  registry_key { '32:HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DateTime\\Servers':
+  registry_key { 'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DateTime\\Servers':
     ensure       => present,
     purge_values => $purge_unmanaged_servers,
   }
