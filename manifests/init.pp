@@ -9,7 +9,7 @@ class winntp (
   # form the $ntp_servers String from the $servers Array.
   $ntp_servers = join(suffix($servers, ',0x9'), ' ')
 
-  registry_value { 'HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Parameters\\Type':
+  registry_value { '32:HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Parameters\\Type':
     type   => 'string',
     data   => 'NTP',
     notify => Service['w32time'],
