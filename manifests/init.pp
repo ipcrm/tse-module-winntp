@@ -22,7 +22,7 @@ class winntp (
     notify => Service['w32time'],
   }
 
-  registry_value { 'HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\TimeProviders\\NtpClient\\SpecialPollInterval':
+  registry_value { '32:HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\TimeProviders\\NtpClient\\SpecialPollInterval':
     ensure => present,
     type   => 'dword',
     data   => $special_poll_interval,
